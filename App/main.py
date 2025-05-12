@@ -4,8 +4,9 @@ import uvicorn
 from fastapi import FastAPI
 
 app = FastAPI()
-app.include_router(pedidosRouter.router)
-app.include_router(productosRouter.router)
+app.include_router(actividadesRouter.router)
+app.include_router(emocionesRouter.router)
+app.include_router(entradasRouter.router)
 app.include_router(usuariosRouter.router)
 @app.get("/")
 async def home():
