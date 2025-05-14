@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "682172c1ce9135701bd1f5ce"
+  },
+  "nombre": "PepitoElChiquito",
+  "contrasena": "Frutodrilo19",
+  "correo": "Bluey1802@gmail.com",
+  "edad": 23,
+  "FechaCreacion": "2025-05-11T22:49:09.679070"
+},
+{
+  "_id": {
+    "$oid": "6822abd7a8a2f021d01eee22"
+  },
+  "nombre": "Mordecai",
+  "contrasena": "RowRow23",
+  "correo": "chicaSexy@gmail.com",
+  "edad": 29,
+  "FechaCreacion": "2025-05-12T20:47:49.507177"
+},
+{
+  "_id": {
+    "$oid": "6822c62f0b4c54e3cd6c935d"
+  },
+  "nombre": "Mamuto",
+  "contrasena": "Mamutt192",
+  "correo": "cmamut1802@gmail.com",
+  "edad": 12,
+  "FechaCreacion": "2025-05-12T23:09:04.685669"
+}]

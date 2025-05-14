@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "682395c6c466a26450cc30d8"
+  },
+  "idUsuario": "6822c62f0b4c54e3cd6c935d",
+  "nombre": "Correr",
+  "descripcion": "run run ruuuuun",
+  "icono": "Persona corriendo"
+},
+{
+  "_id": {
+    "$oid": "682395ebc466a26450cc30d9"
+  },
+  "idUsuario": "6822c62f0b4c54e3cd6c935d",
+  "nombre": "Paseadona",
+  "descripcion": "Paseo por el parque",
+  "icono": "Jardin"
+},
+{
+  "_id": {
+    "$oid": "6823960cc466a26450cc30da"
+  },
+  "idUsuario": "6822c62f0b4c54e3cd6c935d",
+  "nombre": "Desayunar",
+  "descripcion": "Huevos y jamón",
+  "icono": "Huevo"
+}]

@@ -1,0 +1,90 @@
+[{
+  "_id": {
+    "$oid": "68240f703f6830992c99b105"
+  },
+  "nombre": "Feliz",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Amarillo"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b106"
+  },
+  "nombre": "Triste",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Azul"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b107"
+  },
+  "nombre": "Enojado",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Rojo"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b108"
+  },
+  "nombre": "Incomodo",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Rosa"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b109"
+  },
+  "nombre": "Asustado",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Morado"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b10a"
+  },
+  "nombre": "¡Muy Feliz!",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Amarillo saturado"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b10b"
+  },
+  "nombre": "Aburrido",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Gris"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b10c"
+  },
+  "nombre": "Terriblemente mal",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Negro"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b10d"
+  },
+  "nombre": "Ansioso",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Naranja"
+},
+{
+  "_id": {
+    "$oid": "68240f703f6830992c99b10e"
+  },
+  "nombre": "Relajado",
+  "descripcion": "Default",
+  "icono": "",
+  "color": "Verde"
+}]
