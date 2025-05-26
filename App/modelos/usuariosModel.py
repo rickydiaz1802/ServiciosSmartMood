@@ -8,6 +8,7 @@ class UsuarioInsert(BaseModel):
     correo: str
     edad: int
     FechaCreacion: datetime | None = datetime.today()
+    tipo: str
 
 class Salida(BaseModel):
     mensaje: str
@@ -32,6 +33,7 @@ class UsuarioSelect(BaseModel):
     correo: str
     edad: int
     FechaCreacion: datetime
+    tipo: str
 
 class UsuariosSalida(Salida):
     usuarios: list[UsuarioSelect]

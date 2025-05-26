@@ -35,8 +35,11 @@ class UsuariosDAO:
             if verificarContrasena:
                 if usuario.correo.endswith(("@gmail.com", "@accitesz.com")):
                     if usuario.edad >= 2:
-                        result = self.db.Usuarios.insert_one(jsonable_encoder(usuario))
-                        salida.mensaje = "Usuario insertado con exito"
+                        if usuario.tipo in ("usuario", "administrador"):
+                            result = self.db.Usuarios.insert_one(jsonable_encoder(usuario))
+                            salida.mensaje = "Usuario insertado con exito"
+                        else:
+                            salida.mensaje = "Error. Tipo de usuario no válido"
                     else:
                         salida.mensaje = "Error. El usuario no tiene la edad suficiente"
                 else:
@@ -52,6 +55,14 @@ class UsuariosDAO:
         usuario = None
         try:
             usuario = self.db.Usuarios.find_one({"_id": ObjectId(idusuario)})
+        except Exception as ex:
+            print(ex)
+        return usuario
+
+    def verificarUsuarioConCorreo(self, correo:str, contrasena:str):
+        usuario = None
+        try:
+            usuario = self.db.Usuarios.find_one({"correo": correo, "contrasena": contrasena})
         except Exception as ex:
             print(ex)
         return usuario
