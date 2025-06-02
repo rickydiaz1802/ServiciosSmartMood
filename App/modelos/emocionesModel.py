@@ -7,7 +7,9 @@ class EmocionSelect(BaseModel):
     nombre: str
     descripcion: str
     color:str
+    numero : int
     idEmocion:str
+
 
 class EmocionesSalida(Salida):
     emociones: list[EmocionSelect]

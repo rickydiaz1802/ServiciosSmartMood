@@ -1,4 +1,4 @@
-from modelos.actividadesModel import ActividadesSalida, ActividadInsert, EliminarActividad, CambiarDatosActividad
+from modelos.actividadesModel import ActividadCompleta,ActividadesSalida, ActividadInsert, EliminarActividad, CambiarDatosActividad
 from modelos.usuariosModel import Salida
 from fastapi.encoders import jsonable_encoder
 from bson import ObjectId
@@ -8,8 +8,10 @@ class ActividadesDAO:
     def __init__(self, db):
         self.db = db
 
-    def insertarActividad(self, actividad: ActividadInsert):
+    def insertarActividad(self,  usuarioId: str, actividadInsert: ActividadInsert):
         salida = Salida(mensaje="")
+        actividad = ActividadCompleta(idUsuario=usuarioId, nombre= actividadInsert.nombre,
+                                      descripcion=actividadInsert.descripcion, icono=actividadInsert.icono)
         try:
             usuarioDao = UsuariosDAO(self.db)
             usuario = usuarioDao.verificarUsuario(actividad.idUsuario)
@@ -58,18 +60,26 @@ class ActividadesDAO:
         try:
             actividad = self.verificarActividad(idActividad)
             if actividad:
-                cambios = {}
-                if datos.nombre is not None and datos.nombre != "":
-                    cambios["nombre"] = datos.nombre
-                if datos.descripcion is not None and datos.descripcion != "":
-                    cambios["descripcion"] = datos.descripcion
-                if datos.icono is not None and datos.icono != "":
-                    cambios["icono"] = datos.icono
-                if cambios:
-                    self.db.Actividades.update_one({"_id" : ObjectId(idActividad)}, {"$set": cambios})
-                    salida.mensaje = "Datos cambiados con éxito."
+                usuarioDao = UsuariosDAO(self.db)
+                usuario = usuarioDao.verificarUsuario(actividad["idUsuario"])
+                if usuario:
+                    if datos.contrasena == usuario["contrasena"]:
+                        cambios = {}
+                        if datos.nombre is not None and datos.nombre != "":
+                            cambios["nombre"] = datos.nombre
+                        if datos.descripcion is not None and datos.descripcion != "":
+                            cambios["descripcion"] = datos.descripcion
+                        if datos.icono is not None and datos.icono != "":
+                            cambios["icono"] = datos.icono
+                        if cambios:
+                            self.db.Actividades.update_one({"_id" : ObjectId(idActividad)}, {"$set": cambios})
+                            salida.mensaje = "Datos cambiados con éxito."
+                        else:
+                            salida.mensaje = "Error. No se introdujeron nuevos datos."
+                    else:
+                        salida.mensaje = "Error. Contraseña incorrecta."
                 else:
-                    salida.mensaje = "Error. No se introdujeron nuevos datos."
+                    salida.mensaje = "Error. Usuario no encontrado."
             else:
                 salida.mensaje = "Error. Actividad no encontrada."
         except Exception as ex:

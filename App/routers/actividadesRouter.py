@@ -11,10 +11,11 @@ router = APIRouter(
 @router.post("/", response_model=Salida)
 async def crearActividad(actividad:ActividadInsert, request: Request, respuesta: UsuarioSelect= Depends(validarUsuario))->Salida:
     salida = Salida(mensaje="")
+    idUsuario = str(respuesta["_id"])
     print(respuesta)
     if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
         actividadesDAO = ActividadesDAO(request.app.db)
-        return actividadesDAO.insertarActividad(actividad)
+        return actividadesDAO.insertarActividad(idUsuario, actividad)
     else:
         salida.mensaje = "Error. Usuario no encontrado o sin permisos"
         return salida

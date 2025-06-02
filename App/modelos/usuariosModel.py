@@ -27,7 +27,7 @@ class CambiarDatos(BaseModel):
     edad: Optional[int] = None
 
 class UsuarioSelect(BaseModel):
-    idPedido:str
+    idUsuario:str
     nombre: str
     contrasena: str
     correo: str
