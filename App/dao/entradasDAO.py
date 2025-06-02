@@ -105,7 +105,20 @@ class EntradasDAO:
     def consultaUsuario(self, idUsuario:str):
         salida = EntradasSalida(mensaje = "", entradas=[])
         try:
-            lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}}))
+            lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}, "usuario.idUsuario": idUsuario}))
+            salida.mensaje = "Consulta exitosa. Listado de entradas:"
+            salida.actividades = lista
+        except Exception as ex:
+            print(ex)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al hacer la consulta, tontito"
+            salida.lista = None
+        return salida
+
+    def consultaPorId(self, idEntrada:str):
+        salida = EntradasSalida(mensaje="", entradas=[])
+        try:
+            lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}, "idEntrada": idEntrada}))
             salida.mensaje = "Consulta exitosa. Listado de entradas:"
             salida.actividades = lista
         except Exception as ex:

@@ -19,3 +19,15 @@ async def crearEntrada(entrada:EntradaInsert, request: Request, respuesta: Usuar
     else:
         salida.mensaje = "Error. Usuario no encontrado o sin permisos"
         return salida
+
+@router.post("/", response_model=Salida)
+async def eliminarEntrada(request: Request, respuesta: UsuarioSelect= Depends(validarUsuario))->Salida:
+    salida = Salida(mensaje="")
+    contrasena = str(respuesta["_id"])
+    print(respuesta)
+    if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
+        entradasDAO = EntradasDAO(request.app.db)
+        return entradasDAO.insertarEntrada(idUsuario, entrada)
+    else:
+        salida.mensaje = "Error. Usuario no encontrado o sin permisos"
+        return salida
