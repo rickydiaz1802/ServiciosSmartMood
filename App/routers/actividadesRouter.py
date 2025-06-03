@@ -44,7 +44,6 @@ async def cambiarDatos(idActividad: str, datos: CambiarDatosActividad, request: 
 
 @router.get("/", response_model=ActividadesSalida)
 async def consultarActividades(request : Request, respuesta: UsuarioSelect= Depends(validarUsuario)) -> ActividadesSalida:
-
     print(respuesta)
     if respuesta and respuesta["tipo"] == "administrador":
         actividadesDAO = ActividadesDAO(request.app.db)

@@ -20,14 +20,56 @@ async def crearEntrada(entrada:EntradaInsert, request: Request, respuesta: Usuar
         salida.mensaje = "Error. Usuario no encontrado o sin permisos"
         return salida
 
-@router.post("/", response_model=Salida)
-async def eliminarEntrada(request: Request, respuesta: UsuarioSelect= Depends(validarUsuario))->Salida:
+@router.delete("/eliminar/{idEntrada}", response_model=Salida)
+async def eliminarEntrada( idEntrada: str, request: Request, respuesta: UsuarioSelect= Depends(validarUsuario))->Salida:
     salida = Salida(mensaje="")
-    contrasena = str(respuesta["_id"])
+    contrasena = respuesta["contrasena"]
     print(respuesta)
     if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
         entradasDAO = EntradasDAO(request.app.db)
-        return entradasDAO.insertarEntrada(idUsuario, entrada)
+        return entradasDAO.eliminarEntrada(idEntrada, contrasena)
     else:
         salida.mensaje = "Error. Usuario no encontrado o sin permisos"
         return salida
+
+@router.put("/{idEntrada}/cambiardatos", response_model=Salida)
+async def cambiarDatos(idEntrada: str, datos: CambiarDatosEntrada, request: Request, respuesta: UsuarioSelect= Depends(validarUsuario))->Salida:
+    salida = Salida(mensaje="")
+    contrasena = respuesta["contrasena"]
+    print(respuesta)
+    if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
+        entradasDAO = EntradasDAO(request.app.db)
+        return entradasDAO.cambiarDatos(idEntrada, contrasena, datos)
+    else:
+        salida.mensaje = "Error. Usuario no encontrado o sin permisos"
+        return salida
+
+@router.get("/", response_model=EntradasSalida)
+async def consultarEntradas(request : Request, respuesta: UsuarioSelect= Depends(validarUsuario)) -> EntradasSalida:
+    print(respuesta)
+    if respuesta and respuesta["tipo"] == "administrador":
+        entradasDAO = EntradasDAO(request.app.db)
+        return entradasDAO.consultaGeneral()
+    else:
+        return EntradasSalida(entradas=[], mensaje="Error. Usuario no encontrado o sin permisos")
+
+@router.get("/{idUsuario}", response_model=EntradasSalida)
+async def consultarEntradasDelUsuario(idUsuario:str,request : Request, respuesta: UsuarioSelect= Depends(validarUsuario)) -> EntradasSalida:
+    print(respuesta)
+    if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
+        entradasDAO = EntradasDAO(request.app.db)
+        return entradasDAO.consultaUsuario(idUsuario)
+    else:
+        return EntradasSalida(entradas=[], mensaje="Error. Usuario no encontrado o sin permisos")
+
+@router.get("/{idEntrada}", response_model=EntradasSalida)
+async def consultarEntradaIndividual(idEntrada:str,request : Request, respuesta: UsuarioSelect= Depends(validarUsuario)) -> EntradasSalida:
+    print(respuesta)
+    if respuesta and respuesta["tipo"] in ("administrador", "usuario"):
+        entradasDAO = EntradasDAO(request.app.db)
+        return entradasDAO.consultaPorId(idEntrada)
+    else:
+        return EntradasSalida(entradas=[], mensaje="Error. Usuario no encontrado o sin permisos")
+
+
+
