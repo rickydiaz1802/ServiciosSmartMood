@@ -74,7 +74,7 @@ class EntradasDAO:
                         if datos.fecha is not None and datos.fecha != "":
                             cambios["fecha"] = datos.fecha
                         if cambios:
-                            self.db.Actividades.update_one({"_id" : ObjectId(idEntrada)}, {"$set": cambios})
+                            self.db.Entradas.update_one({"_id" : ObjectId(idEntrada)}, {"$set": cambios})
                             salida.mensaje = "Datos cambiados con éxito."
                         else:
                             salida.mensaje = "Error. No se introdujeron nuevos datos."
@@ -94,10 +94,9 @@ class EntradasDAO:
         try:
             lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}}))
             salida.mensaje = "Consulta exitosa. Listado de entradas:"
-            salida.actividades = lista
+            salida.entradas = lista
         except Exception as ex:
             print(ex)
-            salida.estatus = "ERROR"
             salida.mensaje = "Error al hacer la consulta, tontito"
             salida.lista = None
         return salida
@@ -107,10 +106,9 @@ class EntradasDAO:
         try:
             lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}, "usuario.idUsuario": idUsuario}))
             salida.mensaje = "Consulta exitosa. Listado de entradas:"
-            salida.actividades = lista
+            salida.entradas = lista
         except Exception as ex:
             print(ex)
-            salida.estatus = "ERROR"
             salida.mensaje = "Error al hacer la consulta, tontito"
             salida.lista = None
         return salida
@@ -120,10 +118,9 @@ class EntradasDAO:
         try:
             lista = list(self.db.EntradasView.find({"eliminada": {"$exists": False}, "idEntrada": idEntrada}))
             salida.mensaje = "Consulta exitosa. Listado de entradas:"
-            salida.actividades = lista
+            salida.entradas = lista
         except Exception as ex:
             print(ex)
-            salida.estatus = "ERROR"
             salida.mensaje = "Error al hacer la consulta, tontito"
             salida.lista = None
         return salida
